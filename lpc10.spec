@@ -14,6 +14,7 @@ URL:		http://www.arl.wustl.edu/~jaf/lpc/
 Source0:	%{name}-%{version}.tar.bz2
 Patch0:		%{name}-shared.patch
 BuildRequires:	libtool
+BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
 %description
 LPC-10 2400 bps Voice Coder library and tools.
