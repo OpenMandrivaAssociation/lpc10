@@ -1,20 +1,18 @@
-%define	name	lpc10
-%define	version	1.5
-
-%define	major	_1
-%define libname	%mklibname %{name} %{major}
+%define	major _1
+%define libname %mklibname %{name} %{major}
+%define develname %mklibname %{name} -d
 
 Summary:	LPC-10 2400 bps Voice Coder
-Name:		%{name}
-Version:	%{version}
-Release:	%mkrel 7
+Name:		lpc10
+Version:	1.5
+Release:	%mkrel 8
 Group:		Sound
 License:	distributable
 URL:		http://www.arl.wustl.edu/~jaf/lpc/
 Source0:	%{name}-%{version}.tar.bz2
 Patch0:		%{name}-shared.patch
 BuildRequires:	libtool
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 LPC-10 2400 bps Voice Coder library and tools.
@@ -26,14 +24,15 @@ Group:          System/Libraries
 %description -n	%{libname}
 LPC-10 2400 bps Voice Coder library and tools.
 
-%package -n	%{libname}-devel
-Summary:	LPC-10 2400 bps Voice Coder headers files
+%package -n	%{develname}
+Summary:	LPC-10 2400 bps Voice Coder development files
 Group:		Development/C
 Provides:	%{name}-devel = %{version}
 Provides:	lib%{name}-devel = %{version}
 Requires:	%{libname} = %{version}
+Obsoletes:	%{mklibname lpc10 -d _1}
 
-%description -n	%{libname}-devel
+%description -n	%{develname}
 LPC-10 2400 bps Voice Coder headers and static library.
 
 %prep
@@ -50,7 +49,7 @@ make -C \
     OPT="%{optflags} -fPIC"
 
 %install
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 make -C lpc55-C \
     DESTDIR=%{buildroot} \
@@ -69,7 +68,7 @@ cp -f lpc55-C/lpc10/README README.lpc10
 %endif
 
 %clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
@@ -80,11 +79,9 @@ cp -f lpc55-C/lpc10/README README.lpc10
 %defattr(-,root,root)
 %attr(0755,root,root) %{_libdir}/*.so.*
 
-%files -n %{libname}-devel
+%files -n %{develname}
 %defattr(-,root,root)
 %{_includedir}/*.h
 %attr(0755,root,root) %{_libdir}/*.so
 %attr(0644,root,root) %{_libdir}/*.la
 %attr(0755,root,root) %{_libdir}/*.a
-
-
