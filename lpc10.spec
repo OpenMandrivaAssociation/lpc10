@@ -36,15 +36,14 @@ Obsoletes:	%{mklibname lpc10 -d _1}
 LPC-10 2400 bps Voice Coder headers and static library.
 
 %prep
-
 %setup -q
-%patch -p1
+%patch0 -p1
 
 %build
 
 make -C \
     lpc55-C \
-    CC="%{__cc}" \
+    CC="gcc %{?ldflags}" \
     LIBDIR="%{_libdir}" \
     OPT="%{optflags} -fPIC"
 
