@@ -5,7 +5,7 @@
 Summary:	LPC-10 2400 bps Voice Coder
 Name:		lpc10
 Version:	1.5
-Release:	%mkrel 11
+Release:	%mkrel 12
 Group:		Sound
 License:	distributable
 URL:		http://www.arl.wustl.edu/~jaf/lpc/
