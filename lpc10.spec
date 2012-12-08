@@ -5,7 +5,7 @@
 Summary:	LPC-10 2400 bps Voice Coder
 Name:		lpc10
 Version:	1.5
-Release:	%mkrel 12
+Release:	%mkrel 14
 Group:		Sound
 License:	distributable
 URL:		http://www.arl.wustl.edu/~jaf/lpc/
@@ -48,8 +48,6 @@ make -C \
     OPT="%{optflags} -fPIC"
 
 %install
-rm -rf %{buildroot}
-
 make -C lpc55-C \
     DESTDIR=%{buildroot} \
     LIBDIR="%{_libdir}" \
@@ -57,17 +55,6 @@ make -C lpc55-C \
 
 cp -f lpc55-C/README README.tools
 cp -f lpc55-C/lpc10/README README.lpc10
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
@@ -82,5 +69,66 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %{_includedir}/*.h
 %attr(0755,root,root) %{_libdir}/*.so
-%attr(0644,root,root) %{_libdir}/*.la
-%attr(0755,root,root) %{_libdir}/*.a
+
+
+%changelog
+* Wed May 04 2011 Oden Eriksson <oeriksson@mandriva.com> 1.5-12mdv2011.0
++ Revision: 666095
+- mass rebuild
+
+* Fri Dec 03 2010 Oden Eriksson <oeriksson@mandriva.com> 1.5-11mdv2011.0
++ Revision: 606419
+- rebuild
+
+* Tue Mar 16 2010 Oden Eriksson <oeriksson@mandriva.com> 1.5-10mdv2010.1
++ Revision: 520975
+- rebuilt for 2010.1
+
+* Wed Sep 02 2009 Christophe Fergeau <cfergeau@mandriva.com> 1.5-9mdv2010.0
++ Revision: 426004
+- rebuild
+
+* Tue Apr 07 2009 Funda Wang <fwang@mandriva.org> 1.5-8mdv2009.1
++ Revision: 364612
+- use ldflags
+
+* Wed Jun 18 2008 Oden Eriksson <oeriksson@mandriva.com> 1.5-8mdv2009.0
++ Revision: 225116
+- fix devel package naming
+
+  + Pixel <pixel@mandriva.com>
+    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
+
+* Thu Jan 03 2008 Olivier Blin <oblin@mandriva.com> 1.5-7mdv2008.1
++ Revision: 140933
+- restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+
+
+* Fri Oct 20 2006 Oden Eriksson <oeriksson@mandriva.com> 1.5-7mdv2007.0
++ Revision: 71214
+- Import lpc10
+
+* Thu Aug 03 2006 Oden Eriksson <oeriksson@mandriva.com> 1.5-7mdv2007.0
+- rebuild
+
+* Sun May 14 2006 Stefan van der Eijk <stefan@eijk.nu> 1.5-6mdk
+- BuildRequires:	libtool
+
+* Sun Feb 19 2006 Oden Eriksson <oeriksson@mandriva.com> 1.5-5mdk
+- fix the summary and deps
+
+* Sun Mar 13 2005 Oden Eriksson <oeriksson@mandrakesoft.com> 1.5-4mdk
+- use the %%mkrel macro
+
+* Tue Dec 28 2004 Oden Eriksson <oeriksson@mandrakesoft.com> 1.5-3mdk
+- lib64 fixes
+
+* Sun Dec 26 2004 Oden Eriksson <oeriksson@mandrakesoft.com> 1.5-2mdk
+- lib64 fix
+
+* Sun Sep 12 2004 Oden Eriksson <oeriksson@mandrakesoft.com> 1.5-1mdk
+- initial mandrake package, pld import
+
