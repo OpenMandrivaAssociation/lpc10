@@ -29,18 +29,18 @@
 -nuke2:	nuke2.o bitio.o sampleio.o liblpc10.a
 -	$(CC) -o $@ nuke2.o bitio.o sampleio.o -L. -llpc10 -lm
 +nuke:	nuke.o bitio.o sampleio.o
-+	libtool --mode=link $(CC) -o $@ nuke.o bitio.o sampleio.o liblpc10.la -lm
++	libtool --tag=CC --mode=link $(CC) -o $@ nuke.o bitio.o sampleio.o liblpc10.la -lm
  
 -unnuke2:	unnuke2.o bitio.o sampleio.o liblpc10.a
 -	$(CC) -o $@ unnuke2.o bitio.o sampleio.o -L. -llpc10 -lm
 +unnuke:	unnuke.o bitio.o sampleio.o
-+	libtool --mode=link $(CC) -o $@ unnuke.o bitio.o sampleio.o liblpc10.la -lm
++	libtool --tag=CC --mode=link $(CC) -o $@ unnuke.o bitio.o sampleio.o liblpc10.la -lm
 +
 +nuke2:	nuke2.o bitio.o sampleio.o
-+	libtool --mode=link $(CC) -o $@ nuke2.o bitio.o sampleio.o liblpc10.la -lm
++	libtool --tag=CC --mode=link $(CC) -o $@ nuke2.o bitio.o sampleio.o liblpc10.la -lm
 +
 +unnuke2:	unnuke2.o bitio.o sampleio.o
-+	libtool --mode=link $(CC) -o $@ unnuke2.o bitio.o sampleio.o liblpc10.la -lm
++	libtool --tag=CC --mode=link $(CC) -o $@ unnuke2.o bitio.o sampleio.o liblpc10.la -lm
 +
 +installlib:
 +	$(MAKE) -C lpc10 install
@@ -49,10 +49,10 @@
 +
 +install: installlib
 +	install -d $(DESTDIR)$(BINDIR)
-+	libtool --mode=install install nuke $(DESTDIR)$(BINDIR)
-+	libtool --mode=install install unnuke $(DESTDIR)$(BINDIR)
-+	libtool --mode=install install nuke2 $(DESTDIR)$(BINDIR)
-+	libtool --mode=install install unnuke2 $(DESTDIR)$(BINDIR)
++	libtool --tag=CC --mode=install install nuke $(DESTDIR)$(BINDIR)
++	libtool --tag=CC --mode=install install unnuke $(DESTDIR)$(BINDIR)
++	libtool --tag=CC --mode=install install nuke2 $(DESTDIR)$(BINDIR)
++	libtool --tag=CC --mode=install install unnuke2 $(DESTDIR)$(BINDIR)
  
  clean:
  	-rm -f *.o
@@ -142,14 +142,14 @@
 +		tbdm.lo		\
 +		voicin.lo	\
 +		vparms.lo
-+	libtool --mode=link $(CC) -o $(LIB) $^ -rpath $(LIBDIR) -lm
++	libtool --tag=CC --mode=link $(CC) -o $(LIB) $^ -rpath $(LIBDIR) -lm
 +
 +%.lo : %.c
-+	libtool --mode=compile $(CC) $(CFLAGS) -o $@ -c $<
++	libtool --tag=CC --mode=compile $(CC) $(CFLAGS) -o $@ -c $<
 +
 +install:
 +	install -d $(DESTDIR)$(LIBDIR)
-+	libtool --mode=install install $(LIB) $(DESTDIR)$(LIBDIR)
++	libtool --tag=CC --mode=install install $(LIB) $(DESTDIR)$(LIBDIR)
  
  clean:
  	-rm -f *.o
