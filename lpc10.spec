@@ -1,6 +1,7 @@
 %define	major 0
 %define libname %mklibname %{name}_ %{major}
 %define devname %mklibname %{name} -d
+%define _disable_lto 1
 
 Summary:	LPC-10 2400 bps Voice Coder
 Name:		lpc10
