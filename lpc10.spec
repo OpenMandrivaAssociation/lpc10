@@ -9,7 +9,7 @@ Version:	1.5
 Release:	30
 Group:		Sound
 License:	distributable
-Url:		http://www.arl.wustl.edu/~jaf/lpc/
+Url:		https://www.arl.wustl.edu/~jaf/lpc/
 Source0:	%{name}-%{version}.tar.bz2
 Patch0:		%{name}-shared.patch
 BuildRequires:	libtool
