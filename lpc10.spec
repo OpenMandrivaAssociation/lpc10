@@ -12,6 +12,7 @@ License:	distributable
 Url:		https://www.arl.wustl.edu/~jaf/lpc/
 Source0:	%{name}-%{version}.tar.bz2
 Patch0:		%{name}-shared.patch
+BuildRequires:	make
 BuildRequires:	libtool
 
 %description
